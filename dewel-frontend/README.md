@@ -1,7 +1,7 @@
 ## 1. Install packages
 
 ```console
-npm install
+npm run dev
 ```
 
 

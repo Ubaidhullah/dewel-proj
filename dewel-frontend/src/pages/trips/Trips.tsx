@@ -46,6 +46,7 @@ function Trips() {
       },
     ],
   });
+  
   const createTrip = async (e) => {
     e.preventDefault();
     await addTrip({
