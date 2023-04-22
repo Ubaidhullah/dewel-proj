@@ -1,21 +1,22 @@
 import { gql } from "@apollo/client";
 
 export const ADD_LOCATION = gql`
-  mutation CreateLocation($island: String!, $description: String!) {
+  mutation CreateLocation($island: String!, $description: String!, $distance: Float!) {
     createLocation(
-      createLocationInput: { island: $island, description: $description }
+      createLocationInput: { island: $island, description: $description , distance: $distance}
     ) {
       id
     }
   }
 `;
 export const UPDATE_LOCATION = gql`
-  mutation UpdateLocation($id: Int!, $island: String!, $description: String!) {
+  mutation UpdateLocation($id: Int!, $island: String!, $description: String!, $distance: Float!) {
     updateLocation(
       updateLocationInput: {
         id: $id
         island: $island
         description: $description
+        distance: $distance
       }
     ) {
       id

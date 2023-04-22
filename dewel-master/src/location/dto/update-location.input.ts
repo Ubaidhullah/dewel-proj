@@ -11,4 +11,7 @@ export class UpdateLocationInput extends PartialType(CreateLocationInput) {
 
   @Field()
   description: string;
+  
+  @Field()
+  distance: number;
 }

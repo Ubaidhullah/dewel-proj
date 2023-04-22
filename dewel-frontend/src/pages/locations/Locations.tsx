@@ -4,12 +4,14 @@ import {
   PlusCircleOutlined,
 } from "@ant-design/icons";
 import { useMutation, useQuery } from "@apollo/client";
+import Filters from "../../common/Filter";
 import {
   Breadcrumb,
   Button,
   Form,
   FormInstance,
   Input,
+  InputNumber,
   Modal,
   Table,
   Typography,
@@ -33,6 +35,8 @@ function Locations() {
   }
   const [island, setIsland] = useState("");
   const [description, setDescrription] = useState("");
+  const [distance, setDistance] = useState(0);
+
   const formRef = React.useRef<FormInstance>(null);
 
   const [addLocation] = useMutation(ADD_LOCATION, {
@@ -48,6 +52,7 @@ function Locations() {
       variables: {
         island: island,
         description: description,
+        distance: distance,
       },
     });
     setisModalOpen(false);
@@ -66,6 +71,7 @@ function Locations() {
         id: editingLocation,
         island: island,
         description: description,
+        distance: distance,
       },
     });
     setisModalOpen(false);
@@ -119,6 +125,7 @@ function Locations() {
           columns={[
             { title: "Island", dataIndex: "island" },
             { title: "Description", dataIndex: "description" },
+            { title: "Distance", dataIndex: "distance", filterSearch: true },
             {
               title: "Manage",
               align: "center",
@@ -136,6 +143,7 @@ function Locations() {
                         formRef.current?.setFieldsValue({
                           description: selectedLocation.description,
                           island: selectedLocation.island,
+                          distance: selectedLocation.distance,
                         });
                         setisModalOpen(true);
                       }}
@@ -194,6 +202,14 @@ function Locations() {
                 setDescrription(e.target.value);
               }}
             ></Input.TextArea>
+          </Form.Item>
+          <Form.Item name="distance" label="Distance">
+            <InputNumber
+              onChange={(e) => {
+                setDistance(Number(e));
+              }}
+              addonAfter="km"
+            ></InputNumber>
           </Form.Item>
         </Form>
       </Modal>

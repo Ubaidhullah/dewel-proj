@@ -6,6 +6,7 @@ type Location {
   id: Int
   island: String
   description: String
+  distance: Float
 }
 
 type Trip {
@@ -32,6 +33,11 @@ type TripReq {
   returnDate: DateTime!
 }
 
+type Requester {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   helloWorld: String!
   trips: [Trip!]!
@@ -40,6 +46,7 @@ type Query {
   location(id: Int!): Location!
   tripreqs: [TripReq!]!
   tripreq(id: Int!): TripReq!
+  requester(id: Int!): Requester!
 }
 
 type Mutation {
@@ -52,6 +59,9 @@ type Mutation {
   createTripReq(createTripReqInput: CreateTripReqInput!): TripReq!
   updateTripReq(updateTripReqInput: UpdateTripReqInput!): TripReq!
   removeTripReq(id: Int!): TripReq!
+  createRequester(createRequesterInput: CreateRequesterInput!): Requester!
+  updateRequester(updateRequesterInput: UpdateRequesterInput!): Requester!
+  removeRequester(id: Int!): Requester!
 }
 
 input CreateTripInput {
@@ -78,11 +88,13 @@ input UpdateTripInput {
 input CreateLocationInput {
   island: String!
   description: String!
+  distance: Float!
 }
 
 input UpdateLocationInput {
   island: String!
   description: String!
+  distance: Float!
   id: Int!
 }
 
@@ -98,5 +110,16 @@ input UpdateTripReqInput {
   destination: String!
   departureDate: DateTime!
   returnDate: DateTime!
+  id: Int!
+}
+
+input CreateRequesterInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateRequesterInput {
+  """Example field (placeholder)"""
+  exampleField: Int
   id: Int!
 }

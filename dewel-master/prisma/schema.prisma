@@ -16,6 +16,7 @@ model location {
   id          Int       @id @default(autoincrement())
   island      String    @unique
   description String?
+  distance   Int?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   trips       trip[]
@@ -25,7 +26,8 @@ model location {
 model trip {
   id                 Int       @id @default(autoincrement())
   createdAt          DateTime  @default(now())
-  requester          String
+  requester          requester @relation(fields: [requesterId], references: [id])
+  requesterId        Int
   destination        location  @relation(fields: [destinationId], references: [id])
   destinationId      Int
   departureDate      DateTime?
@@ -38,9 +40,21 @@ model trip {
 model tripreq {
   id            Int       @id @default(autoincrement())
   createdAt     DateTime  @default(now())
-  requester     String
+  requester     requester @relation(fields: [requesterId], references: [id])
+  requesterId   Int
   destination   location  @relation(fields: [destinationId], references: [id])
   destinationId Int
   departureDate DateTime?
   returnDate    DateTime?
+}
+
+
+
+model requester {
+  id        Int      @id @default(autoincrement()) 
+  createdAt DateTime @default(now())
+  name      String
+  email     String
+  trips     trip[]
+  tripreqs  tripreq[]
 }

@@ -10,4 +10,7 @@ export class Location {
 
   @Field({ nullable: true })
   description: string;
+
+  @Field({ nullable: true})
+  distance: number;
 }

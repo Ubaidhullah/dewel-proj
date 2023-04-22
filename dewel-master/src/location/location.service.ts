@@ -11,6 +11,7 @@ export class LocationService {
       data: {
         island: createLocationInput.island,
         description: createLocationInput.description,
+        distance: createLocationInput.distance,
       },
     });
   }
@@ -29,6 +30,7 @@ export class LocationService {
       data: {
         island: updateLocationInput.island,
         description: updateLocationInput.description,
+        distance: updateLocationInput.distance,
       },
     });
   }

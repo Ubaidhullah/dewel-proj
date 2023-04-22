@@ -6,17 +6,19 @@ import { AppService } from './app.service';
 import { LocationModule } from './location/location.module';
 import { TripModule } from './trip/trip.module';
 import { TripReqModule } from './tripreq/tripreq.module';
+import { RequesterModule } from './requester/requester.module';
 
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
-      playground: false,
+      playground: true,
       driver: ApolloDriver,
       autoSchemaFile: 'src/schema.gql',
     }),
     TripModule,
     LocationModule,
     TripReqModule,
+    RequesterModule,
   ],
   controllers: [],
   providers: [AppService, AppResolver],

@@ -6,6 +6,7 @@ const GET_ALL_LOCATIONS = gql`
       id
       island
       description
+      distance
     }
   }
 `;

@@ -7,4 +7,7 @@ export class CreateLocationInput {
 
   @Field()
   description: string;
+
+  @Field()
+  distance: number;
 }
