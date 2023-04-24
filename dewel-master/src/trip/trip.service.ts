@@ -8,7 +8,7 @@ export class TripService {
   async create(createTripInput: CreateTripInput) {
     return await this.prisma.trip.create({
       data: {
-        requester: createTripInput.requester,
+        requesterId: Number(createTripInput.requester),
         departureDate: createTripInput.departureDate,
         returnDate: createTripInput.returnDate,
         estimatedBudget: createTripInput.estimatedBudget,
@@ -37,7 +37,7 @@ export class TripService {
     return this.prisma.trip.update({
       where: { id },
       data: {
-        requester: updateTripInput.requester,
+        requesterId: Number(updateTripInput.requester),
         departureDate: updateTripInput.departureDate,
         returnDate: updateTripInput.returnDate,
         estimatedBudget: updateTripInput.estimatedBudget,

@@ -23,6 +23,7 @@ import {
   GET_ALL_LOCATIONS,
   GET_ALL_TRIPS,
   GET_ALL_TRIPS_REQ,
+  GET_ALL_REQUESTER,
 } from "../../GraphQL/Queries";
 import {
   ADD_TRIP,
@@ -39,6 +40,8 @@ function TripRequests() {
   if (error) {
     message.error("could not fetch locations");
   }
+
+
 
   const [isModalOpen, setisModalOpen] = useState(false);
   const [departureDate, setdepartureDate] = useState("");
@@ -59,7 +62,7 @@ function TripRequests() {
     e.preventDefault();
     await addTrip({
       variables: {
-        requester: requester,
+        requester: `${requester}`,
         destination: `${destination}`,
         departureDate: new Date(departureDate),
         returnDate: new Date(returnDate),
@@ -79,7 +82,7 @@ function TripRequests() {
     await updateTrip({
       variables: {
         id: editingTrip,
-        requester: requester,
+        requester: `${requester}`,
         destination: `${destination}`,
         departureDate: new Date(departureDate),
         returnDate: new Date(returnDate),
@@ -226,8 +229,23 @@ function TripRequests() {
               }}
             />{" "}
           </Form.Item>
-        <Form.Item label="Requester" name="requester">
-          <Input onChange={(e)=>{setrequester(e.target.value)}}  />
+        <Form.Item label="Requester">
+        <Select
+              loading={loading}
+              showSearch
+              style={{ width: 200 }}
+              placeholder="Search to Select"
+              filterOption={(input, option) =>
+                `${option?.label ?? ""}`.includes(input)
+              }
+              options={data?.requesters.map((req: any) => ({
+                label: req.name,
+                value: req.id,
+              }))}
+              onSelect={(val) => {
+                setrequester(val);
+              }}
+              />{" "}
         </Form.Item>
           <Form.Item label="Departure">
             <DatePicker

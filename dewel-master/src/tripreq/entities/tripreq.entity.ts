@@ -5,7 +5,7 @@ export class TripReq {
   @Field(() => Int)
   id: number;
 
-  @Field()
+  @Field({ nullable: true })
   requester: string;
 
   @Field({ nullable: true })
@@ -16,4 +16,5 @@ export class TripReq {
 
   @Field()
   returnDate: Date;
+
 }

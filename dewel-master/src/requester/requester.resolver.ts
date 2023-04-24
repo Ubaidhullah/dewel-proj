@@ -13,7 +13,7 @@ export class RequesterResolver {
     return this.requesterService.create(createRequesterInput);
   }
 
-  @Query(() => [Requester], { name: 'requester' })
+  @Query(() => [Requester], { name: 'requesters' })
   findAll() {
     return this.requesterService.findAll();
   }

@@ -10,6 +10,16 @@ const GET_ALL_LOCATIONS = gql`
     }
   }
 `;
+
+const GET_ALL_REQUESTER = gql`
+  query getLocations {
+    locations {
+      id
+      name
+      email
+    }
+  }
+`;
 const GET_ALL_TRIPS = gql`
   query getTrips {
     trips {
@@ -43,7 +53,13 @@ const GET_ALL_TRIPS_REQ = gql`
       island
       description
     }
+    requesters {
+      id
+      name
+      email
+    }
   }
 `;
 
-export { GET_ALL_LOCATIONS, GET_ALL_TRIPS, GET_ALL_TRIPS_REQ };
+
+export { GET_ALL_LOCATIONS, GET_ALL_TRIPS, GET_ALL_TRIPS_REQ, GET_ALL_REQUESTER };

@@ -7,13 +7,15 @@ import { LocationModule } from './location/location.module';
 import { TripModule } from './trip/trip.module';
 import { TripReqModule } from './tripreq/tripreq.module';
 import { RequesterModule } from './requester/requester.module';
+import { join } from 'path';
+
 
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       playground: true,
       driver: ApolloDriver,
-      autoSchemaFile: 'src/schema.gql',
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     TripModule,
     LocationModule,

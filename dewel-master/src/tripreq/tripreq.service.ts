@@ -8,7 +8,7 @@ export class TripReqService {
   async create(CreateTripReqInput: CreateTripReqInput) {
     return await this.prisma.tripreq.create({
       data: {
-        requester: CreateTripReqInput.requester,
+        requesterId: Number(CreateTripReqInput.requester),
         departureDate: CreateTripReqInput.departureDate,
         returnDate: CreateTripReqInput.returnDate,
         destinationId: Number(CreateTripReqInput.destination),
@@ -18,11 +18,15 @@ export class TripReqService {
 
   async findAll() {
     let found = await this.prisma.tripreq.findMany({
-      include: { destination: true },
+      include: {
+        destination: true,
+        requester: true
+      }
     });
     return found.map((item) => ({
       ...item,
       destination: item.destination.island,
+      requester: item.requester.name,
     }));
   }
 
@@ -34,7 +38,7 @@ export class TripReqService {
     return this.prisma.tripreq.update({
       where: { id },
       data: {
-        requester: updateTripInput.requester,
+        requesterId:Number (updateTripInput.requester),
         departureDate: updateTripInput.departureDate,
         returnDate: updateTripInput.returnDate,
         destinationId: Number(updateTripInput.destination),

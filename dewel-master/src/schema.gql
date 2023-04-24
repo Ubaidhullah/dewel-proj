@@ -27,15 +27,16 @@ scalar DateTime
 
 type TripReq {
   id: Int!
-  requester: String!
+  requester: String
   destination: String
   departureDate: DateTime!
   returnDate: DateTime!
 }
 
 type Requester {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: Int
+  name: String
+  email: String
 }
 
 type Query {
@@ -46,6 +47,7 @@ type Query {
   location(id: Int!): Location!
   tripreqs: [TripReq!]!
   tripreq(id: Int!): TripReq!
+  requesters: [Requester!]!
   requester(id: Int!): Requester!
 }
 
@@ -114,12 +116,12 @@ input UpdateTripReqInput {
 }
 
 input CreateRequesterInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  name: String!
+  email: String!
 }
 
 input UpdateRequesterInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  name: String!
+  email: String!
   id: Int!
 }
