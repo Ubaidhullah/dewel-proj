@@ -4,7 +4,6 @@ import {
   PlusCircleOutlined,
 } from "@ant-design/icons";
 import { useMutation, useQuery } from "@apollo/client";
-import Filters from "../../common/Filter";
 import {
   Breadcrumb,
   Button,

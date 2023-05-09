@@ -4,6 +4,8 @@ import type { MenuProps } from "antd";
 import { Layout, Menu, theme } from "antd";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Locations from "./pages/locations/Locations";
+import Requesters from "./pages/requesters/requester";
+
 import Trips from "./pages/trips/Trips";
 import {
   ApolloClient,
@@ -55,6 +57,7 @@ const items: MenuItem[] = [
   getItem("Locations", "locations", <AimOutlined />),
   getItem("Trips", "trips", <CarOutlined />),
   getItem("Trip Requests", "trip_requests", <FormOutlined />),
+  getItem("Requesters", "requesters", <FormOutlined />),
 ];
 
 const App: React.FC = () => {
@@ -74,6 +77,9 @@ const App: React.FC = () => {
         break;
       case "trip_requests":
         navigate("/trip_requests");
+        break;
+      case "requesters":
+        navigate("/requesters");
         break;
     }
   };
@@ -108,6 +114,7 @@ const App: React.FC = () => {
                 <Route path="/locations" Component={Locations} />
                 <Route path="/trips" Component={Trips} />
                 <Route path="/trip_requests" Component={TripRequests} />
+                <Route path="/requesters" Component={Requesters} />
               </Routes>
             </Content>
           </Layout>

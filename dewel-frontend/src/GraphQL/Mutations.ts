@@ -137,3 +137,46 @@ export const DELETE_TRIP_REQ = gql`
     }
   }
 `;
+
+// Requester
+export const ADD_REQ = gql`
+mutation CreateRequester(
+  $name: String!
+  $email: String!
+) {
+  createRequester(
+    createRequesterInput: {
+      name :$name
+      email:$email
+    }
+  ) {
+    id
+  }
+}
+`;
+
+export const UPDATE_REQ = gql`
+mutation UpdateRequester(
+  $d: Int!
+  $name: String!
+  $email: String!
+) {
+  createTrip(
+    createRequesterInput: {
+      name:$name
+      email:$email
+    }
+  ) {
+    id
+  }
+}
+`;
+
+export const DELETE_REQ = gql`
+mutation RemoveRequester($id: Int!) {
+  removeRequester(id: $id) {
+    id
+  }
+}
+`;
+  

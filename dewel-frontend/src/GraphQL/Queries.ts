@@ -12,8 +12,8 @@ const GET_ALL_LOCATIONS = gql`
 `;
 
 const GET_ALL_REQUESTER = gql`
-  query getLocations {
-    locations {
+  query getRequesters {
+         requesters{
       id
       name
       email
@@ -24,7 +24,6 @@ const GET_ALL_TRIPS = gql`
   query getTrips {
     trips {
       id
-      requester
       destination
       departureDate
       returnDate
@@ -36,6 +35,11 @@ const GET_ALL_TRIPS = gql`
       id
       island
       description
+    }
+    requesters{
+      id 
+      name 
+      email
     }
   }
 `;

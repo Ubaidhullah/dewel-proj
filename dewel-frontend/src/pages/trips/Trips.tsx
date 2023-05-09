@@ -19,7 +19,7 @@ import {
   message,
 } from "antd";
 import React, { useState } from "react";
-import { GET_ALL_LOCATIONS, GET_ALL_TRIPS } from "../../GraphQL/Queries";
+import { GET_ALL_LOCATIONS, GET_ALL_TRIPS, GET_ALL_TRIPS_REQ } from "../../GraphQL/Queries";
 import { ADD_TRIP, DELETE_TRIP, UPDATE_TRIP } from "../../GraphQL/Mutations";
 const { Title } = Typography;
 
@@ -35,6 +35,7 @@ function Trips() {
   const [estimatedBudget, setestimatedBudget] = useState(0);
   const [estimatedDuration, setestimatedDuration] = useState(0);
   const [estimatedTravelers, setestimatedTravelers] = useState(0);
+  const [requester, setrequester] = useState("")
   const [destination, setdestination] = useState("");
   const [editingTrip, seteditingTrip] = useState(null);
   const formRef = React.useRef<FormInstance>(null);
@@ -51,7 +52,7 @@ function Trips() {
     e.preventDefault();
     await addTrip({
       variables: {
-        requester: "admin",
+        requester: `${requester}`,
         destination: `${destination}`,
         departureDate: new Date(departureDate),
         returnDate: new Date(returnDate),
@@ -74,7 +75,7 @@ function Trips() {
     await updateTrip({
       variables: {
         id: editingTrip,
-        requester: "admin",
+        requester: `${requester}`,
         destination: `${destination}`,
         departureDate: new Date(departureDate),
         returnDate: new Date(returnDate),
@@ -99,6 +100,7 @@ function Trips() {
       },
     });
   };
+
   return (
     <div>
       <div
@@ -132,6 +134,7 @@ function Trips() {
           rowKey="id"
           columns={[
             { title: "Destination", dataIndex: "destination" },
+            { title: "Requester", dataIndex: "requester" },
             {
               title: "Departure date",
               dataIndex: "departureDate",
@@ -232,6 +235,24 @@ function Trips() {
               }}
             />{" "}
           </Form.Item>
+          <Form.Item label="Requester">
+        <Select
+              loading={loading}
+              showSearch
+              style={{ width: 200 }}
+              placeholder="Search to Select"
+              filterOption={(input, option) =>
+                `${option?.label ?? ""}`.includes(input)
+              }
+              options={data?.requesters.map((req: any) => ({
+                label: req.name,
+                value: req.id,
+              }))}
+              onSelect={(val) => {
+                setrequester(val);
+              }}
+              />{" "}
+        </Form.Item>
           <Form.Item label="Departure">
             <DatePicker
               showTime
@@ -241,6 +262,7 @@ function Trips() {
               }}
             />
           </Form.Item>
+       
           <Form.Item label="Return">
             <DatePicker
               showTime
